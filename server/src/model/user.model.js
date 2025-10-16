@@ -13,8 +13,8 @@ const User = sequelize.define(
       allowNull: false,
       unique: true,
     },
-    phone: {
-      type: DataTypes.BIGINT,
+    password: {
+      type: DataTypes.INTEGER,
       allowNull: false,
       unique: true,
     },

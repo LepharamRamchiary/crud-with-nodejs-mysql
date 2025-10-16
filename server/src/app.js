@@ -7,6 +7,11 @@ const app = express();
 app.use(express.json());
 app.use(cors());
 
+
+import userRouter from "./routes/user.router.js";
+
+app.use("/api/users", userRouter);
+
 app.use((err, req, res, next) => {
   if (err instanceof ApiError) {
     return res
