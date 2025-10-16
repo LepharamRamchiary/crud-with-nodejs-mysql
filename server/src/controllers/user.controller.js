@@ -32,25 +32,6 @@ const getSingleUser = asyncHandler(async (req, res) => {
     .json(new ApiResponse(200, user, "User fetched successfully"));
 });
 
-// const updatedUser = asyncHandler(async (req, res) => {
-//   const { id } = req.params;
-//   const { name, email, password } = req.body;
-//   const user = await User.findByPk(id);
-
-//   if (!user) {
-//     throw new ApiError(404, "User not found");
-//   }
-
-//   user.name = name ;
-//   user.email = email ;
-//   user.password = password ;
-//   await user.save({validate: true});
-
-//   res
-//     .status(200)
-//     .json(new ApiResponse(200, user, "User updated successfully"));
-// });
-
 
 const updatedUser = asyncHandler(async (req, res) => {
   const { id } = req.params;
@@ -80,5 +61,20 @@ const updatedUser = asyncHandler(async (req, res) => {
     .json(new ApiResponse(200, user, "User updated successfully"));
 });
 
+const deleteUser = asyncHandler(async (req, res) => {
+  const { id } = req.params;
+  const user = await User.findByPk(id);
+  
+  if (!user) {
+    throw new ApiError(404, "User not found");
+  }
+  
+  await user.destroy();
+  
+  res
+    .status(200)
+    .json(new ApiResponse(200, null, "User deleted successfully"));
+})
 
-export { createUser, getUsers , getSingleUser, updatedUser};
+
+export { createUser, getUsers , getSingleUser, updatedUser, deleteUser};
