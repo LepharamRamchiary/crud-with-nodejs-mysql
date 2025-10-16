@@ -12,4 +12,9 @@ const createUser = asyncHandler(async (req, res) => {
     .json(new ApiResponnse(201, user, "User created successfully"));
 });
 
-export { createUser };
+const getUsers = asyncHandler(async (req, res) => {
+  const users = await User.findAll();
+  res.status(200).json(new ApiResponnse(200, users, "Users fetched successfully")); 
+});
+
+export { createUser , getUsers};
